@@ -1,0 +1,50 @@
+<!-- <p-menubar [model]="items">
+  <div class="nav-hero">
+    <ng-template pTemplate="start">
+
+        <a href="/" class="nav-hero">
+          <img
+            src="https://cruisecode.com/(S(2pllgvc1ggnkedy4appwktu3))/Content/assets/media/CruiseCode_Typo-Blue_landscape.png"
+            class="mr-2 nav-img" />
+        </a>
+
+    </ng-template>
+  </div>
+  <ng-template pTemplate="end">
+    <app-sign-in-up></app-sign-in-up>
+  </ng-template>
+</p-menubar> -->
+
+  <header style="margin-bottom: 24px;">
+    <div class="nav-wrapper">
+      <div class="logo-container">
+        <a href="/" >
+                  <img class="logo"
+                    src="https://cruisecode.com/(S(2pllgvc1ggnkedy4appwktu3))/Content/assets/media/CruiseCode_Typo-White_landscape.png"
+                    alt=" CruiseCode Logo">
+        </a>
+        </div>
+      <nav>
+        <input class="hidden" type="checkbox" id="menuToggle">
+        <label class="menu-btn" for="menuToggle">
+          <div class="menu"></div>
+          <div class="menu"></div>
+          <div class="menu"></div>
+        </label>
+        <div class="nav-container">
+          <ul class="nav-tabs">
+            <li class="nav-tab">
+              <app-sign-in-up></app-sign-in-up>
+            </li>
+            <li class="nav-tab shopping-cart">
+              <a>
+                <i  class="pi pi-shopping-cart" style="font-size: 1.5rem;" pBadge value="0"></i>
+                <!-- shopping-cart Component -->
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>

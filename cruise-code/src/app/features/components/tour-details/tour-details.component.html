@@ -1,0 +1,231 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 style="display: inline; margin-right: 16px">{{ tour.tourName }}</h3>
+        <div class="tags">
+          <div>
+            <p-rating [(ngModel)]="reviewCount.ratingAvg" [cancel]="false" [readonly]="true"></p-rating>
+          </div>
+          <div>
+            <button class="reviews" (click)="scroll(target)">{{reviewCount.totalReview}} Reviews</button>
+          </div>
+          <div style="margin-left: 12px">
+            <p-tag value="{{ tour.duration }}" icon="pi pi-clock"></p-tag>
+          </div>
+          <div style="margin-left: 12px">
+            <p-tag
+              value="Activity Level - {{ tour.physicalLevel }}"
+              icon="pi pi-tags"
+            ></p-tag>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <p-galleria [value]="images" [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{'max-width': '640px', 'margin':'2em auto'}" [numVisible]="5" [circular]="true"
+            [showItemNavigators]="true" [showThumbnails]="false" [showIndicators]="true" [showItemNavigatorsOnHover]="true"
+            [autoPlay]="true" [transitionInterval]="5000" [showIndicatorsOnItem]="true">
+            <ng-template pTemplate="item" let-item>
+              <img [src]="item.imagePath" style="width: 100%; display: block;" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+              <div class="grid grid-nogutter justify-content-center">
+                <img [src]="item.imagePath" style="display: block;" />
+              </div>
+            </ng-template>
+          </p-galleria>
+
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="row">
+      <div class="card text-center" style="padding: 24px 0px">
+        <form [formGroup]="tourPricing" (submit)="addToCart()">
+          <h4>{{ tourDetail.portName }}</h4>
+          <h5>{{ tourDate | date: 'MM/dd/yyyy'}}</h5>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="adults">Adults</label>
+              <p-inputNumber formControlName="adultTotal" [(ngModel)]="adultTotal" [showButtons]="true"
+                buttonLayout="horizontal" inputId="adults" spinnerMode="horizontal" [step]="1"
+                decrementButtonClass="input-btn increment-btn" incrementButtonClass="input-btn increment-btn"
+                incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="0"
+                [inputStyle]="{width: '35px',border: 'none',background: '#fff'}" [style]="{ height: '40px', width: '80%'}"
+                inputStyleClass="input">
+              </p-inputNumber>
+            </div>
+            <div class="col-md-4">
+              <label for="child">Children</label>
+              <p-inputNumber formControlName="childTotal" [(ngModel)]="childTotal" [showButtons]="true"
+                buttonLayout="horizontal" inputId="child" spinnerMode="horizontal" [step]="1"
+                decrementButtonClass="input-btn increment-btn" incrementButtonClass="input-btn increment-btn"
+                incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="0"
+                [inputStyle]="{width: '35px',border: 'none',background: '#fff'}" [style]="{ height: '40px', width: '80%'}"
+                inputStyleClass="input">
+              </p-inputNumber>
+            </div>
+            <div class="col-md-4">
+              <label for="infant">Infants</label>
+              <p-inputNumber formControlName="infantTotal" [(ngModel)]="infantTotal" [showButtons]="true"
+                buttonLayout="horizontal" inputId="infant" spinnerMode="horizontal" [step]="1"
+                decrementButtonClass="input-btn increment-btn" incrementButtonClass="input-btn increment-btn"
+                incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="0"
+                [inputStyle]="{width: '35px',border: 'none',background: '#fff'}" [style]="{ height: '40px', width: '80%'}"
+                inputStyleClass="input">
+              </p-inputNumber>
+            </div>
+          </div>
+          <div class="row" style="margin: 12px 0;">
+            <p-accordion style="padding-left: 0; padding-right: 0;">
+              <p-accordionTab [(selected)]="activeState[0]">
+                <ng-template ngDefaultControl [(ngModel)]="priceTotal" formControlName="subTotal" pTemplate="header">Sub
+                  Total:
+                  {{ subTotal() | currency : "USD" : true : "1.0-0" }}</ng-template>
+                <ng-template pTemplate="content">
+                  <div class="row" style="justify-content: space-between;">
+                    <div style="width: 70%; text-align: left;">{{adultTotal}} Adults x {{tour.adultPrice | currency : "USD" :
+                      true : "1.0-0"}}</div>
+                    <div style="width: 30%; text-align: right;">{{adultTotal * tour.adultPrice | currency : "USD" : true :
+                      "1.0-0"}}</div>
+                  </div>
+                  <div class="row" style="justify-content: space-between;">
+                    <div style="width: 70%; text-align: left;">{{childTotal}} Adults x {{tour.childPrice | currency : "USD" :
+                      true : "1.0-0"}}</div>
+                    <div style="width: 30%; text-align: right">{{childTotal * tour.childPrice | currency : "USD" : true :
+                      "1.0-0"}}</div>
+                  </div>
+                  <div class="row" style="justify-content: space-between;">
+                    <div style="width: 70%; text-align: left;">{{infantTotal}} Infants x {{0 | currency : "USD" : true :
+                      "1.0-0"}}</div>
+                    <div style="width: 30%; text-align: right">{{0 | currency : "USD" : true : "1.0-0"}}</div>
+                  </div>
+                  <div class="row" style="justify-content: center;">
+                    <hr>
+                    <h5>Sub Total: {{ subTotal() | currency : "USD" : true : "1.0-0" }}</h5>
+                  </div>
+                </ng-template>
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+          <div class="row">
+            <div class="col-md-12 my-4">
+              <h5>Available Times</h5>
+              <p *ngIf="this.tourPricing.invalid">Please select a time.</p>
+              <!-- <p-selectButton formControlName="time" [multiple]="false" [required]="true" [options]="availableTimes" [(ngModel)]="value1"
+                optionLabel="tourInventoryTime" optionValue="tourInventoryTime"></p-selectButton> -->
+                {{availableTimes}}
+            </div>
+            <div class="col-md-12">
+              <button (submit)="addToCart()" pButton pRipple type="submit" label="Continue to Booking"
+                class="p-button-warning"></button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <p-tabView  [scrollable]="true">
+        <p-tabPanel header="Overview">
+          <div class="tags-2">
+            <h4>{{ tour.tourName }}</h4>
+            <div class="tag">
+              <p-tag value="{{ tour.duration }}" icon="pi pi-clock"></p-tag>
+            </div>
+            <div class="tag">
+              <p-tag value="Activity Level - {{ tour.physicalLevel }}" icon="pi pi-tags"></p-tag>
+            </div>
+          </div>
+          <p>
+            {{ tour.shortDescription }}
+          </p>
+          <p *ngIf="isShown" class="row container-fluid" id="divshow">
+            {{ tour.description }}
+          </p>
+          <button pButton pRipple type="button" class="p-button-text d-flex" (click)="toggleShow()">
+            {{ isShown ? "Show Less" : "Show More" }}
+          </button>
+        </p-tabPanel>
+
+        <p-tabPanel header="What's Included">
+          <div class="row">
+            <div class="col-12">
+              <h4>What's Included</h4>
+            </div>
+            <div class="col-sm-6">
+              <p-tag severity="success" value="" icon="pi pi-check-circle"></p-tag> {{ tour.whatsIncluded }}
+            </div>
+            <div class="col-sm-6">
+              <p-tag severity="danger" value="" icon="pi pi-minus-circle">
+              </p-tag> {{ tour.whatsNotIncluded }}
+            </div>
+          </div>
+
+        </p-tabPanel>
+        <p-tabPanel header="Tour Itinerary">
+          <div class="list">
+            <div class="list__item" *ngFor="let event of events">
+              <div class="list__time">{{ event.time }}</div>
+              <div class="list__border"></div>
+              <div class="list__desc">
+                <div><p>{{ event.description }}</p></div>
+                <div class="border"></div>
+              </div>
+          </div>
+          </div>
+          <p *ngIf="isShown" class="row container-fluid" id="divshow">
+            {{ tour.description }}
+          </p>
+          <button pButton pRipple type="button" class="p-button-text d-flex" (click)="toggleShow()">
+            {{ isShown ? "Show Less" : "Show More" }}
+          </button>
+
+        </p-tabPanel>
+
+        <p-tabPanel header="Restrictions/Cancellations">
+          <p>
+            This tour service is 100% refundable up until 7 days prior to
+            departure time at which point it will be eligible for a 50%
+            refund until 24 hours prior to departure, at which point it is
+            non-refundable.
+          </p>
+          <ul>
+            <li *ngIf="tour.isLiabilityReleaseRequired">Tour Liability Release: {{ tour.isLiabilityReleaseRequired ?
+              "Required" : "Not Required" }}</li>
+            <li *ngIf="tour.isParticipantCannotBePregnant">{{ tour.isParticipantCannotBePregnant ? "Can NOT be pregnant" :
+              "Can be pregnant" }}</li>
+            <li *ngIf="tour.isParticipantCannotHaveaBackInjury">{{ tour.isParticipantCannotHaveaBackInjury ? "Can NOT have
+              back injuries" :"Can have back injuries" }}</li>
+          </ul>
+        </p-tabPanel>
+        <p-tabPanel header="Pickup/Drop-off">
+          <div class="row justify-content-center">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1048.3749408626977!2d-134.400625!3d58.29639700000001!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1670878865244!5m2!1sen!2sus"
+              width="400" height="300" style="border: 0" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe aria-hidden="true" frameborder="0" tabindex="-1" style="
+                        z-index: -1;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0px;
+                        left: 0px;
+                        border: none;
+                      "></iframe>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12" #target style="margin: 16px auto">
+    <app-tour-reviews></app-tour-reviews>
+  </div>
+</div>

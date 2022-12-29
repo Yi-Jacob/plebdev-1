@@ -1,0 +1,57 @@
+<p-scrollPanel *ngIf="tourList.length > 0" [style]="{width: '100%', height: '800px'}" styleClass="custombar1"> 
+     
+    <div *ngFor="let tour of tourList" >
+        <p></p>
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-md-3">
+                    <img class="card-img" src="{{tour.shoppingCartImagePath}}">
+                </div>
+                <div class="col-lg-9">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-10 ">
+                                <h5 class="fw-light"><a [ngStyle]="{'text-decoration': 'none'}" href="javascript:void();" (click)="getTourDetails(tour.tourInventoryID)">{{ tour.tourName }}</a></h5>
+                                <div class="text-muted fw-light"><span class="mr-2"><fa-icon [icon]="faCalendarDays"></fa-icon></span>&nbsp;  <span class="text-right">{{ tour.tourInventoryDate | date:'medium' }}</span>                       
+                                </div>
+                            </div>
+                            <div class="col-sm-2 text-right">
+                                <span class="font-dm">from</span>                      
+                                <p class="font-dm font-weight-bold font-size-h2">{{ tour.adultPrice | currency }}</p>
+                            </div>
+                        </div>
+                        <p></p>
+                        <div class="d-flex justify-content-start flex-lg-fill">
+                            <div class="d-flex align-items-start flex-lg-fill">
+                             <h6 class="fw-lighter fs-6"><p-rating [(ngModel)]="tour.totalRating" [cancel]="false" [stars]="5" [readonly]="true"></p-rating>{{ tour.totalRating}} Reviews</h6>
+                            </div>
+                        </div>
+                        <p class="fw-lighter">
+                            
+                            {{(tour.showMore) ? tour.description : tour.description | slice:0:200}} <span *ngIf="!tour.showMore">... </span> 
+                            <a href="javascript:;" *ngIf="tour.description.length> 200" (click)="tour.showMore = !tour.showMore">{{tour.showMore ? 'less' : 'More'}}</a>
+                        </p>   
+                        <div class="d-flex justify-content-center">
+                            <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+                               <span class="mr-2"><fa-icon [icon]="faClock"></fa-icon></span>&nbsp;                      
+                               <div class="d-flex flex-colum n font-weight-bold" style="font-size: 0.9rem;">{{ tour.duration | slice:0:2}} hours {{ tour.duration | slice:3:5 }} minutes</div>
+                            </div>
+                            <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
+                               <span class="mr-4"><fa-icon [icon]="faTruckPickup"></fa-icon></span>&nbsp;                      
+                               <div class="d-flex flex-column font-weight-bold" style="font-size: 0.9rem;"><span>Pickup Included</span></div>
+                            </div>
+                            <div class="d-flex align-items-center flex-lg-fill fs-8 mr-5 mb-2">
+                                <span class="mr-4"><fa-icon [icon]="faChartLine"></fa-icon></span>&nbsp; 
+                               <div class="d-flex flex-column font-weight-bold" style="font-size: 0.9rem;"><span>Activity Level - {{ tour.physicalLevel }}</span></div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</p-scrollPanel>
+<ng-template [ngIf]="searchTour&&tourList.length === 0"> 
+    <h4>No excursions found</h4>
+</ng-template>
+

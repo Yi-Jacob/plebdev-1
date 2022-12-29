@@ -1,0 +1,32 @@
+<p-scrollPanel *ngIf="events1.length > 0" [style]="{width: '100%', height: '800px'}" styleClass="custombar1"> 
+  <div class="row"  *ngIf="showItinerary&&events1.length > 0">
+    <p-listbox [options]="events1" [(ngModel)]="selectedItinerary" optionLabel="ShipName" optionValue="departureDate" (click)="getTourExcursion()">
+        <h3>Your Itinerary</h3>
+        <ng-template let-events pTemplate="item">
+          <div class="country-item" style="margin-bottom: -20px;">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                  <span style="margin-top: 0;" class="p-tag">Day {{events.day}}</span>
+              </div>
+              <div class="col-sm-12">
+                <h4 style="margin-top: 8px;">{{events.shipName}}</h4>
+              </div>
+              <div class="col-sm-12"><span style="font-weight: 500; font-size: 18px;">{{events.departureDate | date:'mediumDate'}}</span></div>
+              <div class="col-sm-6 text-left">
+                <small class="p-text-secondary">Arrive: {{events.arrivalDate | date:'shortTime'}}</small>
+              </div>
+              <div class="col-sm-6 text-left">
+                <small class="p-text-secondary">Depart: {{events.departureDate | date:'shortTime'}}</small>
+              </div>
+              <div class="col-sm-12">
+                <p-divider align="center"></p-divider>
+              </div>
+            </div>
+          </div>
+
+        </ng-template>
+      </p-listbox>
+    
+  </div>
+</p-scrollPanel>
+

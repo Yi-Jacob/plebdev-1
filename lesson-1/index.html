@@ -131,7 +131,7 @@
       var price = await getBitcoinPrice();
       string_price = Number(price).toLocaleString();
       $$(`.balance-card p`)[1].innerHTML = `$` + string_price;
-      setTimeout(function () { app(); }, 10000);
+      setTimeout(function () { app(); }, 5000);
       var txs = await getLnbitsTransactions();
       $(`.row-item`).innerHTML = `<h3>Transactions</h3>`;
       txs.forEach(function (tx) {

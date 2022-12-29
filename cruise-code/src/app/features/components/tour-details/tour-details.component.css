@@ -1,0 +1,248 @@
+.list {
+  float: left;
+  padding: 1.5em 0;
+  margin-bottom: 3em;
+}
+
+.list .list__item {
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.list .list__item .list__time {
+  color: #2d2e73;
+  width: 15%;
+  text-align: left;
+}
+
+.list .list__item .list__desc {
+  width: 75%;
+  border-bottom: 1px solid #2d2e73;
+  color: #2d2e73;
+  font-size: 15px;
+  line-height: 22px;
+  padding: 1em 0;
+  position: relative;
+}
+
+.list .list__item .list__desc .border {
+  background: #2a2b31;
+  width: 3px;
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: -8%;
+}
+
+.list .list__item .list__desc .border:after {
+  content: "";
+  background: #3e414e;
+  border: 5px solid #2a2b31;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  margin-top: -9px;
+  left: -5px;
+  width: 8px;
+  height: 8px;
+}
+
+@media (max-width: 550px) {
+  .list .list__item .list__desc .border {
+    left: -5%;
+  }
+}
+
+.list .list__item:last-of-type .list__desc {
+  border-bottom: none;
+}
+
+.list .list__item:last-of-type .list__desc .border:before {
+  content: "";
+  background: #2a2b31;
+  border-radius: 50%;
+  height: 9px;
+  width: 9px;
+  position: absolute;
+  bottom: -8px;
+  left: -4px;
+}
+
+.list .list__item:first-of-type .list__desc .border:before {
+  content: "";
+  background: #2a2b31;
+  border-radius: 50%;
+  height: 9px;
+  width: 9px;
+  position: absolute;
+  top: -8px;
+  left: -4px;
+}
+/*
+.card {
+  background-color: #f5f5f5;
+} */
+
+.card h4,
+.card h5 {
+  color: #1b1c4b;
+}
+
+:host /deep/ .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: #ffffff;
+  background: #fff;
+}
+
+:host /deep/ .p-accordion .p-accordion-header .p-accordion-header-link {
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  color:#1b1c4b;
+}
+/*
+:host /deep/ .p-tabview .p-tabview-nav li .p-tabview-nav-link,
+:host /deep/ .p-tabview .p-tabview-nav,
+:host /deep/ .p-tabview .p-tabview-panels {
+background: #f5f5f5;
+} */
+
+.tags {
+  display: flex;
+  margin: 12px auto;
+  align-items: center;
+}
+
+.tag {
+  margin: 2px;
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+  .tags-2 {
+    display: block;
+  }
+
+  .tag {
+    margin: 8px auto;
+  }
+}
+
+.timeline-item {
+  list-style: none;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  background: linear-gradient(45deg, #209cff, #68e0cf);
+  padding: 3rem 0;
+}
+
+.wrapper {
+  padding: 1rem 2rem;
+  border-radius: 15px;
+}
+
+.sessions {
+  border-radius: 12px;
+  position: relative;
+}
+
+.timeline-item {
+  padding-bottom: 1.5rem;
+  border-left: 1px solid #abaaed;
+  position: relative;
+  padding-left: 20px;
+  margin-left: 10px;
+}
+
+.timeline-item:last-child {
+  border: 0px;
+  padding-bottom: 0;
+}
+
+.timeline-item:before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: white;
+  border: 1px solid #4e5ed3;
+  box-shadow: 3px 3px 0px #bab5f8;
+  box-shadow: 3px 3px 0px #bab5f8;
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+  top: 0px;
+}
+
+.time {
+  color: #2a2839;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 601px) {
+  .time {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .time {
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+  }
+}
+
+
+:host /deep/ .p-rating .p-rating-icon {
+  margin-left: 2px;
+}
+
+:host /deep/ .p-tag .p-tag-icon {
+  margin-right: 0;
+}
+
+.reviews {
+  border: none;
+  background: none;
+  color: #2d2e73;
+}
+
+.reviews:hover {
+  color: #5996d0;
+  border-bottom: 1px solid #5996d0;
+}
+
+/* #2d2e73 */
+
+
+:host /deep/ .p-button.p-button-icon-only {
+  width: 2rem;
+}
+
+:host /deep/ .increment-btn {
+  color: #1b1c4b;
+  background: #fff;
+  border: 1px solid #fff;
+}
+
+/* :host /deep/ .p-accordion-content {
+  background: #f5f5f5;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border: 1px solid #f5f5f5;
+} */
+
+:host /deep/ p-accordion.p-accordion {
+  padding-left: 0;
+  padding-right: 0;
+}

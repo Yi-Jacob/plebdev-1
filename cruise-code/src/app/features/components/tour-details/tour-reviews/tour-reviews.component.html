@@ -1,0 +1,23 @@
+<div *ngIf="reviews.length > 0" class="card" style="padding: 16px;">
+  <div class="row">
+    <div *ngFor="let review of reviews; index as i;" class="col-md-4">
+      <p-rating [(ngModel)]="review.rating" [cancel]="false" [readonly]="true"></p-rating>
+      <!-- <p *ngIf="isShown" class="row container-fluid" id="divshow">
+        {{(isShown) ? review.review : review.review | slice:0:140}}
+       {{review.review}}
+      </p>
+      <button pButton pRipple type="button" class="p-button-text d-flex" (click)="toggleShow()">
+        {{ isShown ? "Show Less" : "Show More" }}
+      </button> -->
+              {{(review.showMore) ? review.review : review.review | slice:0:140}} <span *ngIf="!review.showMore">... </span>
+              <a href="javascript:;" *ngIf="review.review.length> 140" (click)="review.showMore = !review.showMore">{{review.showMore ?
+                'less' : 'More'}}</a>
+      <!-- <p>{{review.review}}</p> -->
+      <p-divider align="left">
+        <div class="inline-flex align-items-center">
+          <i class="pi pi-user mr-2"></i><b>{{review.name}}</b><span>{{review.createdDate | date:'dd/MM/yyyy'}}</span>
+        </div>
+      </p-divider>
+      </div>
+  </div>
+</div>
