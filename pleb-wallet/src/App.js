@@ -35,7 +35,6 @@ function App() {
     // ToDo: Lookup how to move the X-API-Key to a .env file to keep it secret for when we push to Github
     const headers = {
       "X-Api-Key": `${process.env.REACT_APP_key}`,
-      // "X-Api-Key": "263c84448d0f413296202e801552c651",
     };
     axios
       .get("https://legend.lnbits.com/api/v1/wallet", { headers })
@@ -50,7 +49,6 @@ function App() {
     // ToDo: Lookup how to move the X-API-Key to a .env file to keep it secret for when we push to Github
     const headers = {
       "X-Api-Key": `${process.env.REACT_APP_key}`,
-      // "X-Api-Key": "263c84448d0f413296202e801552c651",
     };
     axios
       .get("https://legend.lnbits.com/api/v1/payments", { headers })
