@@ -5,6 +5,7 @@ import Transactions from "./components/Transactions";
 import axios from "axios";
 import "./App.css";
 
+
 function App() {
   // useState lets us store/update/pass data from inside of this component and also refresh the component when the data changes
   // Though this data will be lost on a refresh since we dont have a database
@@ -33,7 +34,7 @@ function App() {
   const getWalletBalance = () => {
     // ToDo: Lookup how to move the X-API-Key to a .env file to keep it secret for when we push to Github
     const headers = {
-      "X-Api-Key": "263c84448d0f413296202e801552c651",
+      "X-Api-Key": `${process.env.REACT_APP_key}`,
     };
     axios
       .get("https://legend.lnbits.com/api/v1/wallet", { headers })
@@ -47,7 +48,7 @@ function App() {
   const getTransactions = () => {
     // ToDo: Lookup how to move the X-API-Key to a .env file to keep it secret for when we push to Github
     const headers = {
-      "X-Api-Key": "263c84448d0f413296202e801552c651",
+      "X-Api-Key": `${process.env.REACT_APP_key}`,
     };
     axios
       .get("https://legend.lnbits.com/api/v1/payments", { headers })
